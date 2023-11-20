@@ -1,0 +1,31 @@
+@startuml
+
+title: Company scrapper
+footer: V1.0.0
+
+cloud "Linkedin" as linkedin
+cloud "Google" as google
+
+rectangle "Scrapper" {
+    database "Sqlite" as db
+    agent "Search Service" as search_serv
+    agent "Main Proccess" as controller
+    agent "DB Service" as db_serv
+    collections "Scrapper Pool" as scrapper_pool
+    queue "Scrapp queue" as scrap_q
+    queue "Persist queue" as db_q
+}
+
+controller .> search_serv: (1.1) Spaw
+controller .> scrapper_pool: (1.2) Spaw
+controller ..> db_serv: (1.3) Spaw
+
+search_serv -> google: (2) Search profile
+search_serv -down-> scrap_q: (3) Push URL
+scrap_q -down-> scrapper_pool: (4) Fech URL
+scrapper_pool -> linkedin: (5) Collect data
+scrapper_pool -down-> db_q: (6) Push data
+db_q -down-> db_serv: (7) Company Data
+db_serv -down-> db: (8) Persists
+
+@enduml

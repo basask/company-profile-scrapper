@@ -1,0 +1,9 @@
+[scrappers]
+workers = 1
+
+[persistance]
+database = companies.db
+
+[linkedin]
+username = 
+password = 
