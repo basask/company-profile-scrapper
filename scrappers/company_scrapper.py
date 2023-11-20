@@ -92,7 +92,7 @@ def company_scrapper(input_q: Queue, out_q: Queue, creadentials: dict):
                 target = None
 
             if target is None:
-                if not runtime.running:
+                if not runtime.is_running():
                     break
                 continue
 

@@ -1,6 +1,9 @@
 class RuntimeState:
     def __init__(self):
-        self.running = True
+        self._running = True
 
     def handle_signal(self, signum, frame):
-        self.running = False
+        self._running = False
+
+    def is_running(self):
+        return self._running

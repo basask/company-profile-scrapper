@@ -49,7 +49,7 @@ def database_service(persist_queue: Queue, db_name: str):
     data = []
     while True:
         if persist_queue.empty():
-            if not runtime.running:
+            if not runtime.is_running():
                 break
             # Sleeping for cases when this function is used as proccess body (current use case)
             # For other use cases not multiprocesses this might be removed

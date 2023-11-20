@@ -78,7 +78,7 @@ password = <Linkedin password>
 
 ### DB01 - Data model shared between scrapper service and database service
 
-Sharing the same model for the two services creates a condition that any changes made on one service needs to be added to another service as well. This makes the design week to change as any engineer maintaining the service needs to be aware of this sharing.
+Sharing the same model for the two services creates a condition that any changes made on one service needs to be added to another service as well. This makes the design weak to change as any engineer maintaining the service needs to be aware of this sharing.
 
 Ideally the database service must not know about the structure of the underlying data serving only as a proxy from the scraped data to the database.
 
