@@ -23,7 +23,7 @@ To interact with the external application the services do use PlayWright to fetc
     1. `Search Service` is initialized with list of companies names and the `Scrapp queue` reference
     2. `Scrappers Pool` are initialized with references form `Scrapp queue` (input) and `Persist queue` (output)
     3. `DB Service` get the `Persist queue` as input and also a database name to store the data to
-2. `Search service` query the `Linkedin` url using `Google` search
+2. `Search service` query the linkedin url using `Google` search
 3. `Search service` pushes all urls found at the `Scrapp queue`
 4. `Scraper Service` pulls url from `Scrapp queue`
 5. `Scraper Service` loads and scrap company data from `Linkedin` profile
@@ -92,7 +92,10 @@ Linkedin will challenge the traffic coming from the scrapper based on the dynami
 
 ### Rate limiters
 
-Both Linkedin and Google Search have rate limiters that can block any traffic from the scrapper. This script was intentionally designed as a multiprocessor system aiming to split the scrappers' processes and achieve some levels of distribution of the scrap process.
+Both Linkedin and Google Search have rate limiters that can block any traffic from the scrapper. 
+
+This script was intentionally designed as a multiprocessor system aiming to split the scrappers' processes and achieve some levels of distribution of the scrap process.
+The scrappers services in scrapper pool can be put behind different IP addresses in order to avoid routing all the requests through the same address (proxying)
 
 ### ORM and Schema management
 
@@ -104,18 +107,17 @@ Currently the scrapper only gets a small amount of data from Linkedin. There is 
 
 To name a few:
 - List of employees
-- Skills of employees
-- Locations of employees
+- Skills, age, location, languages, etc of employees
 - Job opportunities
 - Posts (Including some NLP processing)
-- Mensiong in Posts and Comments
+- Mentions in Posts and Comments
 - Employee transitions (What companies they came from, What companies they go to)
 
 ### Data Structure
 
 TL;DR A graph database like Neo4j might represent the social connections better.
 
-Linkedin is a social network and as such it is natural that its data is organized as connections between parties. 
+Linkedin is a social network and as such it is natural that its data is organized as connections between parties (Nodes and Edges). 
 
 The database solution used for this exercise (Sqlite) is a relational SQL database. It is tailored to store structured data. 
 
